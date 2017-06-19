@@ -26,4 +26,20 @@ public class BlogTypeServiceImpl implements BlogTypeService{
         pageBean.setTotal(blogTypeDao.getTotalNum());
         return pageBean;
     }
+
+    public int addBlogType(BlogType blogType) {
+        return blogTypeDao.addBlogType(blogType);
+    }
+
+    public int deleteBlogType(Integer id) {
+        return blogTypeDao.deleteBlogType(id);
+    }
+
+    public int updateBlogType(BlogType blogType) {
+        return blogTypeDao.updateBlogType(blogType);
+    }
+
+    public long getTotalNum() {
+        return blogTypeDao.getTotalNum();
+    }
 }

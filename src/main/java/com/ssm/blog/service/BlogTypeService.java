@@ -13,4 +13,27 @@ public interface BlogTypeService {
      * @return
      */
     PageBean<BlogType> listByPage(PageBean<BlogType> pageBean);
+
+    /**
+     * 增加博客类型
+     * @param blogType
+     * @return
+     */
+    int addBlogType(BlogType blogType);
+
+    /**
+     * 删除博客类型
+     * @param id
+     * @return
+     */
+    int deleteBlogType(Integer id);
+
+    /**
+     * 更新博客类型
+     * @param blogType
+     * @return
+     */
+    int updateBlogType(BlogType blogType);
+
+    long getTotalNum();
 }

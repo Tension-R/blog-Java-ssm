@@ -26,6 +26,9 @@ public class BlogType {
         this.orderNum = orderNum;
     }
 
+    public BlogType() {
+    }
+
     public Integer getId() {
         return id;
     }

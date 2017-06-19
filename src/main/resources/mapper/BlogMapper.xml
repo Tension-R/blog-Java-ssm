@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.blog.dao.BlogDao">
+
+    <resultMap id="BlogResult" type="Blog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="releaseDate" column="releaseDate"/>
+        <result property="clickHit" column="clickHit"/>
+        <result property="replyHit" column="replyHit"/>
+        <result property="content" column="content"/>
+        <result property="keyword" column="keyword"/>
+
+        <association property="blogType" column="type_id" select="com.ssm.blog.dao.BlogTypeDao.queryById"/>
+
+    </resultMap>
+
+    <sql id="columns">id, title, summary, releaseDate, clickHit, replyHit, content, keyword</sql>
+
+    <select id="listBlog" parameterType="Map" resultMap="BlogResult">
+        SELECT
+        <include refid="columns"/>
+        FROM t_blog
+        <where>
+            <if test="title != null and !&quot;&quot;.equals(title.trim())">
+                and title like "%"#{title}"%"
+            </if>
+            <if test="typeId != null">
+                and type_id = #{typeId};
+            </if>
+            <if test="releaseDateStr != null and !&quot;&quot;.equals(releaseDateStr.trim())">
+                and DATE_FORMAT(releaseDateStr, '%Y年%M月') = #{releaseDateStr}
+            </if>
+        </where>
+        ORDER by releaseDate DESC
+        <if test="start != null and end != null">
+            LIMIT #{start},#{end}
+        </if>
+    </select>
+</mapper>

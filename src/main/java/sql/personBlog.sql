@@ -21,3 +21,20 @@ CREATE TABLE `t_blogtype`(
   `orderNum` INT(11) DEFAULT NULL COMMENT '博客排序',
   PRIMARY KEY (`id`)
 )ENGINE = InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET = utf8 COMMENT '博客类别表';
+
+CREATE TABLE `t_blog`(
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '博客类型',
+  `title` VARCHAR(200) NOT NULL COMMENT '博客题目',
+  `summary` VARCHAR(400) DEFAULT NULL COMMENT '博客摘要',
+  `releaseDate` DATETIME DEFAULT NULL COMMENT '发布日期',
+  `clickHit` INT(11) DEFAULT NULL COMMENT '浏览数',
+  `replyHit` INT(11) DEFAULT NULL COMMENT '评论数',
+  `content` TEXT COMMENT '博客内容',
+  `keyword` VARCHAR(200) DEFAULT NULL COMMENT '关键字',
+  `type_id` INT(11) DEFAULT NULL COMMENT '外键关联博客类别',
+  PRIMARY KEY (`id`),
+  KEY `type_id` (`type_id`),
+  CONSTRAINT `t_blog_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `t_blogtype` (`id`)
+)ENGINE = InnoDB AUTO_INCREMENT = 35 DEFAULT CHARSET = utf8 COMMENT '博文表';
+
+INSERT INTO `t_blog` (title, content) VALUE ('test1','test2');
